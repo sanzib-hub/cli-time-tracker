@@ -9,7 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 )
-var title string
+
 // exportCmd represents the export command
 var exportCmd = &cobra.Command{
 	Use:   "export",
@@ -21,10 +21,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if title == ""{
-			fmt.Println("Please provide a title")
-			return
-		}
+		fmt.Println("export called")
 	},
 }
 

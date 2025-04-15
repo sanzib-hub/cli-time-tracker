@@ -3,6 +3,7 @@ package storage
 import (
 	"cli/internal/task"
 	"encoding/json"
+	"io"
 	"os"
 	"path/filepath"
 )
@@ -23,13 +24,14 @@ func LoadTask() ([]task.Task, error){
 
 	var tasks []task.Task
 	err = json.NewDecoder(file).Decode(&tasks)
-	if err != nil {
-		return nil, err
+	if err == io.EOF {
+		// File is empty — return an empty task list
+		return []task.Task{}, nil
 	}
 	return tasks, nil
 }
 
-func saveTask(tasks []task.Task)error{
+func SaveTask(tasks []task.Task)error{
 
 	err := os.MkdirAll(filepath.Dir(dataFile), 0755)
 	if err != nil{

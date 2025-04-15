@@ -1,14 +1,18 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
+	"cli/internal/storage"
+	"cli/internal/task"
 	"fmt"
+	"time"
 
 	"github.com/spf13/cobra"
 )
+
+var title string
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
@@ -21,12 +25,35 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
+		if title == ""{
+			fmt.Println("Please provide a title for the task.")
+			return
+		}
+		tasks, err := storage.LoadTask()
+		if err !=nil {
+			fmt.Println("Error loading tasks:", err)
+			return
+		}
+		newTask:= task.Task{
+			ID: len(tasks) + 1,
+			Title: title,
+			IsRunning: false,
+			CreatedAt: time.Now(),
+		}
+
+		tasks = append(tasks, newTask)
+		err = storage.SaveTask(tasks)
+		if err != nil {
+			fmt.Println("Error saving tasks:", err)
+			return
+		}
+		fmt.Printf("Task added: %s\n", title)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(addCmd)
+	addCmd.Flags().StringVarP(&title, "title", "t", "", "Title of the task")
 
 	// Here you will define your flags and configuration settings.
 
