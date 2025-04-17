@@ -3,8 +3,8 @@
     "ID": 1,
     "Title": "Hello",
     "IsRunning": false,
-    "StartTime": "0001-01-01T00:00:00Z",
-    "TotalTime": 0,
+    "StartTime": "2025-04-18T00:56:14.476993002+05:30",
+    "TotalTime": 384008015205,
     "CreatedAt": "2025-04-16T01:16:38.634681235+05:30"
   }
 ]
@@ -13,8 +13,8 @@
     "ID": 1,
     "Title": "Hello",
     "IsRunning": false,
-    "StartTime": "0001-01-01T00:00:00Z",
-    "TotalTime": 0,
+    "StartTime": "2025-04-18T00:56:14.476993002+05:30",
+    "TotalTime": 384008015205,
     "CreatedAt": "2025-04-16T01:16:38.634681235+05:30"
   }
 ]
