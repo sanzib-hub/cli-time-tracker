@@ -1,11 +1,13 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
+	"cli/internal/storage"
 	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/spf13/cobra"
 )
@@ -21,7 +23,30 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("start called")
+		fmt.Println(args)
+		id, err := strconv.Atoi(args[0])
+		if err != nil || id <= 0{
+			fmt.Println("PLease provide valid task id")
+			return
+		}
+		tasks, err := storage.LoadTask()
+		if err != nil{
+			fmt.Println("Error loading tasks:", err)
+			return
+		}	
+		for i, task := range tasks{
+			if task.ID == id{
+				tasks[i].IsRunning = true
+				tasks[i].StartTime = time.Now()
+				err = storage.SaveTask(tasks)
+				if err != nil {
+					fmt.Println("Error saving tasks:", err)
+					return
+				}
+				fmt.Printf("Task %d started\n", id)
+				return
+			}
+		}
 	},
 }
 
