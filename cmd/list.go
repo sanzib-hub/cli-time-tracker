@@ -35,6 +35,8 @@ to quickly create a Cobra application.`,
 			fmt.Println("ID:", task.ID)
 			fmt.Println("Title:", task.Title)
 			fmt.Println("Is Running:", task.IsRunning)
+			fmt.Println("Start Time:", task.StartTime)
+			fmt.Println("Created At:", task.CreatedAt)
 			fmt.Println("Total Time:", task.TotalTime)
 		}
 	},
